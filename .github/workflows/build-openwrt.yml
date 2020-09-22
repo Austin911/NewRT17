@@ -86,7 +86,7 @@ jobs:
         ../$DIY_P2_SH
 
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
+      uses: P3TERX/debugger-action@main
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
     - name: Download package
@@ -110,7 +110,7 @@ jobs:
         echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
 
     - name: Upload bin directory
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
@@ -126,7 +126,7 @@ jobs:
         echo "::set-output name=status::success"
 
     - name: Upload firmware directory
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
